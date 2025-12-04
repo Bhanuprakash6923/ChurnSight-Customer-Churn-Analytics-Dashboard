@@ -1,0 +1,21 @@
+customer_id,tenure,monthly_charges,total_charges,contract_type,churn
+CUST001,2,500,1000,Month-to-month,1
+CUST002,5,700,3500,One year,0
+CUST003,10,650,6500,Month-to-month,0
+CUST004,15,900,13500,Two year,0
+CUST005,8,550,4400,One year,1
+CUST006,3,400,1200,Month-to-month,1
+CUST007,12,850,10200,One year,0
+CUST008,20,950,18000,Two year,0
+CUST009,4,450,1800,Month-to-month,1
+CUST010,18,880,15840,Two year,0
+CUST011,7,600,4200,One year,1
+CUST012,11,720,7920,Month-to-month,0
+CUST013,9,680,6120,Two year,0
+CUST014,6,510,3060,One year,1
+CUST015,13,860,11180,Month-to-month,0
+CUST016,1,390,390,Month-to-month,1
+CUST017,14,820,11480,One year,0
+CUST018,19,990,18810,Two year,0
+CUST019,16,910,14560,One year,0
+CUST020,17,940,15980,Two year,0

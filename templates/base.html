@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Churn Analytics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f5f7fb;
+            color: #212529;
+        }
+        .navbar-brand {
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+        .card {
+            border-radius: 0.75rem;
+        }
+        .btn-sm {
+            border-radius: 999px;
+        }
+
+        /* 🌙 Dark theme */
+        body.theme-dark {
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+        body.theme-dark .navbar {
+            background-color: #000 !important;
+        }
+        body.theme-dark .card {
+            background-color: #1f1f1f;
+            color: #f5f5f5;
+        }
+        body.theme-dark .table {
+            color: #f5f5f5;
+        }
+        body.theme-dark .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+        body.theme-dark .table-light {
+            background-color: #333 !important;
+            color: #f5f5f5;
+        }
+        body.theme-dark .alert {
+            background-color: #1f1f1f;
+            color: #f5f5f5;
+            border-color: #444;
+        }
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'analytics:dashboard' %}">
+            📊 Churn Analytics
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'analytics:dashboard' %}">Dashboard</a>
+                </li>
+
+                {# Admin-only items #}
+                {% if user.is_authenticated and user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'analytics:upload_dataset' %}">
+                            Upload Dataset
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'analytics:model_list' %}">Models</a>
+                </li>
+
+                {% if user.is_authenticated and user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/">Admin Panel</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+            <span class="navbar-text text-white d-flex align-items-center">
+                {% if user.is_authenticated %}
+                    {{ user.username }}
+                    {% if user.is_staff %}
+                        <span class="badge bg-warning text-dark ms-1">Admin</span>
+                    {% else %}
+                        <span class="badge bg-info text-dark ms-1">Analyst</span>
+                    {% endif %}
+
+                    <form action="{% url 'logout' %}" method="post"
+                          class="ms-3 mb-0 d-inline">
+                        {% csrf_token %}
+                        <button type="submit"
+                                class="btn btn-link text-warning p-0 m-0 align-baseline">
+                            Logout
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="text-warning text-decoration-none me-2">
+                        Login
+                    </a>
+                {% endif %}
+
+                <!-- 🌗 Theme toggle button -->
+                <button id="themeToggle" type="button"
+                        class="btn btn-outline-light btn-sm ms-3">
+                    🌙 Dark
+                </button>
+            </span>
+        </div>
+    </div>
+</nav>
+
+<div class="container mb-5">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+
+    {% block content %}{% endblock %}
+</div>
+
+{# Chart.js for live charts (dashboard, etc.) #}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    (function () {
+        const body = document.body;
+        const toggleBtn = document.getElementById('themeToggle');
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            body.classList.add('theme-dark');
+        }
+
+        function updateButtonText() {
+            if (!toggleBtn) return;
+            const isDark = body.classList.contains('theme-dark');
+            toggleBtn.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+        }
+
+        updateButtonText();
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function () {
+                body.classList.toggle('theme-dark');
+                const newTheme = body.classList.contains('theme-dark') ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+                updateButtonText();
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+# ==========================
+# Django / Python
+# ==========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.log
+
+# ==========================
+# Environment & Virtualenv
+# ==========================
+venv/
+env/
+ENV/
+.venv/
+.python-version
+
+# ==========================
+# IDE / Editor Files
+# ==========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==========================
+# Django Files
+# ==========================
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+static_root/
+node_modules/
+
+# ==========================
+# Project-specific
+# ==========================
+saved_models/
+datasets/
+*.h5
+*.pickle
+*.pkl
+*.joblib
+*.csv
+*.xlsx
+
+# ==========================
+# Secrets / Config Files
+# ==========================
+.env
+*.env
+secrets.json
+
+# ==========================
+# OS Files
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Logs & Cache
+# ==========================
+*.log
+logs/
+celerybeat-schedule
+celerybeat.pid
+
+# ==========================
+# Python Build
+# ==========================
+build/
+dist/
+*.spec

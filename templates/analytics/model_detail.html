@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-3">Model Detail</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h4 class="card-title mb-3">{{ model_obj.name }}</h4>
+
+        <p><strong>Dataset:</strong> {{ model_obj.dataset.name }}</p>
+
+        <div class="row">
+            <div class="col-md-3">
+                <p><strong>Accuracy:</strong> {{ model_obj.accuracy|floatformat:3 }}</p>
+            </div>
+            <div class="col-md-3">
+                <p><strong>Precision:</strong> {{ model_obj.precision|floatformat:3 }}</p>
+            </div>
+            <div class="col-md-3">
+                <p><strong>Recall:</strong> {{ model_obj.recall|floatformat:3 }}</p>
+            </div>
+            <div class="col-md-3">
+                <p><strong>F1 Score:</strong> {{ model_obj.f1_score|floatformat:3 }}</p>
+            </div>
+        </div>
+
+        <!-- 🔥 Confusion Matrix (Heatmap-style) -->
+        <h5 class="mt-3">Confusion Matrix</h5>
+        <div class="table-responsive mb-2" style="max-width: 420px;">
+            <table class="table table-bordered table-sm text-center align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th rowspan="2" class="align-middle">Actual</th>
+                        <th colspan="2">Predicted</th>
+                    </tr>
+                    <tr>
+                        <th>Not Churn (0)</th>
+                        <th>Churn (1)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Not Churn (0)</th>
+                        <td class="bg-success-subtle">
+                            <div><strong>{{ model_obj.tn }}</strong></div>
+                            <small class="text-muted">True Negative</small>
+                        </td>
+                        <td class="bg-danger-subtle">
+                            <div><strong>{{ model_obj.fp }}</strong></div>
+                            <small class="text-muted">False Positive</small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Churn (1)</th>
+                        <td class="bg-warning-subtle">
+                            <div><strong>{{ model_obj.fn }}</strong></div>
+                            <small class="text-muted">False Negative</small>
+                        </td>
+                        <td class="bg-primary-subtle">
+                            <div><strong>{{ model_obj.tp }}</strong></div>
+                            <small class="text-muted">True Positive</small>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="mt-3">
+            <a class="btn btn-success btn-sm"
+               href="{% url 'analytics:single_predict' model_obj.id %}">
+                🔹 Single Prediction
+            </a>
+
+            <a class="btn btn-outline-primary btn-sm"
+               href="{% url 'analytics:batch_predict' model_obj.id %}">
+                📌 Batch Predict (CSV)
+            </a>
+
+            <a class="btn btn-outline-secondary btn-sm"
+               href="{% url 'analytics:export_predictions' model_obj.id %}">
+                📥 Download Predictions CSV
+            </a>
+
+            <a class="btn btn-dark btn-sm"
+               href="{% url 'analytics:model_list' %}">
+                ← Back to Models
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<h3>Recent Predictions</h3>
+<table class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Probability</th>
+            <th>Label</th>
+            <th>Risk</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in predictions %}
+        <tr>
+            <td>{{ p.customer_id }}</td>
+            <td>{{ p.probability|floatformat:2 }}</td>
+            <td>
+                {% if p.label %}
+                    Churn
+                {% else %}
+                    No Churn
+                {% endif %}
+            </td>
+            <td>{{ p.risk_level }}</td>
+            <td>{{ p.predicted_at|date:"Y-m-d H:i" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No predictions yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Models</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Dataset</th>
+            <th>Accuracy</th>
+            <th>F1 Score</th>
+            <th>Created</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for m in models %}
+        <tr>
+            <td>{{ m.name }}</td>
+            <td>{{ m.dataset.name }}</td>
+            <td>{{ m.accuracy|floatformat:2 }}</td>
+            <td>{{ m.f1_score|floatformat:2 }}</td>
+            <td>{{ m.created_at }}</td>
+            <td><a class="btn btn-sm btn-outline-primary" href="{% url 'analytics:model_detail' m.id %}">View</a></td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">No models yet.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

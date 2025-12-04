@@ -1,0 +1,120 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}Churn Admin | {{ title }}{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    :root {
+        --bg-dark: #0a0f1e;
+        --bg-card: rgba(255, 255, 255, 0.06);
+        --accent: #38bdf8;
+        --text-light: #eef2ff;
+    }
+
+    /* FULL SCREEN PREMIUM BACKGROUND */
+    body {
+        background: radial-gradient(circle at top, #0ea5e9 0%, #0a0f1e 65%);
+        background-attachment: fixed;
+        color: var(--text-light);
+    }
+
+    /* Remove default sidebar spacing / layout */
+    #content.colMS,
+    #content.colM,
+    #content-main {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 15px 20px !important;
+    }
+
+    /* Header */
+    #header {
+        background: rgba(15, 23, 42, 0.7) !important;
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255,255,255,0.12);
+        color: var(--text-light);
+    }
+
+    #branding h1 a {
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #f3f4f6 !important;
+        text-transform: uppercase;
+    }
+
+    .module {
+        border-radius: 18px !important;
+        background: rgba(255,255,255,0.05) !important;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255,255,255,0.1) !important;
+        padding: 12px;
+        color: var(--text-light);
+        margin-bottom: 20px;
+    }
+
+    .module caption,
+    .module h2 {
+        background: transparent !important;
+        color: var(--text-light) !important;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        padding-bottom: 10px;
+    }
+
+    .module table {
+        width: 100%;
+        color: var(--text-light);
+    }
+
+    .module tr:hover {
+        background: rgba(255,255,255,0.08);
+    }
+
+    /* Remove default sidebar panel */
+    #nav-sidebar,
+    .app-index,
+    #sidebar {
+        display: none !important;
+    }
+
+    /* Dashboard Hero Banner */
+    .admin-top-banner {
+        width: 100%;
+        border-radius: 18px;
+        padding: 20px 26px;
+        background: linear-gradient(
+            120deg,
+            rgba(14, 165, 233, 0.8),
+            rgba(2, 6, 23, 0.8)
+        );
+        backdrop-filter: blur(12px);
+        box-shadow: 0 12px 30px rgba(185, 16, 16, 0.4);
+        margin-bottom: 25px;
+    }
+
+    .admin-top-title {
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .admin-top-sub {
+        opacity: 0.9;
+        font-size: 0.9rem;
+    }
+</style>
+{% endblock %}
+
+{% block branding %}
+    <div id="branding">
+        <h1 id="site-name">
+            <a href="{% url 'admin:index' %}">
+                ⚙️ Churn Admin Console
+            </a>
+        </h1>
+    </div>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

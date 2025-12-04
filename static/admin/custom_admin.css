@@ -1,0 +1,77 @@
+/* ===== Dark theme toggle button ===== */
+.admin-theme-toggle {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 9999;
+    border-radius: 999px;
+    padding: 6px 12px;
+    border: none;
+    background: #0d6efd;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+.admin-theme-toggle:hover {
+    background: #0b5ed7;
+}
+
+/* ===== Admin dark theme ===== */
+body.theme-dark-admin {
+    background-color: #111;
+    color: #f5f5f5;
+}
+
+/* Header */
+body.theme-dark-admin #header {
+    background-color: #000 !important;
+    border-bottom-color: #ffc107 !important;
+}
+body.theme-dark-admin #header a {
+    color: #f5f5f5 !important;
+}
+
+/* Modules & panels */
+body.theme-dark-admin .module,
+body.theme-dark-admin .admin-panel,
+body.theme-dark-admin .app-card {
+    background-color: #1e1e1e !important;
+    color: #f5f5f5 !important;
+    border-color: #333 !important;
+}
+
+/* Tables in dark mode */
+body.theme-dark-admin .admin-table thead th,
+body.theme-dark-admin #content-main table thead th {
+    background-color: #222 !important;
+    color: #f5f5f5 !important;
+}
+body.theme-dark-admin .admin-table tbody tr:hover,
+body.theme-dark-admin #content-main table tbody tr:hover {
+    background-color: #222 !important;
+}
+
+/* Links */
+body.theme-dark-admin a {
+    color: #4dabf7;
+}
+body.theme-dark-admin a:visited {
+    color: #91a7ff;
+}
+
+/* ===== Sticky search bar on changelist ===== */
+.change-list #changelist-search {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: inherit;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Icon + name alignment in app list */
+.app-card-model-name a {
+    margin-left: 4px;
+}

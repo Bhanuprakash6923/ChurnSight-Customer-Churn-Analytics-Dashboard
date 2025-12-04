@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-3">Dataset: {{ dataset.name }}</h1>
+
+<div class="mb-3">
+    <p><strong>Uploaded by:</strong> {{ dataset.uploaded_by }}</p>
+    <p><strong>Uploaded at:</strong> {{ dataset.uploaded_at|date:"Y-m-d H:i" }}</p>
+    <p><strong>Total rows:</strong> {{ total_rows }}</p>
+    <p><strong>Total columns:</strong> {{ total_cols }}</p>
+</div>
+
+<div class="mb-3">
+    <a href="{% url 'analytics:train_model' dataset.id %}" class="btn btn-success">
+        Train Model on this Dataset
+    </a>
+    <a href="{% url 'analytics:dashboard' %}" class="btn btn-secondary">
+        Back to Dashboard
+    </a>
+</div>
+
+<hr>
+
+<h3>Preview (first 20 rows)</h3>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-sm">
+        <thead class="table-light">
+            <tr>
+                {% for col in columns %}
+                    <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    {% for col in columns %}
+                        <td>{{ row[col] }}</td>
+                    {% endfor %}
+                </tr>
+            {% empty %}
+                <tr><td colspan="{{ columns|length }}">No data in this dataset.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

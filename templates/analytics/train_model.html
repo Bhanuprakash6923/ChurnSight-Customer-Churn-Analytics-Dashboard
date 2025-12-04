@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Train Model</h1>
+<p>Dataset: <strong>{{ dataset.name }}</strong></p>
+<p>This will train a Logistic Regression model using the <code>churn</code> column as target.</p>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-success">Train Model</button>
+</form>
+{% endblock %}
