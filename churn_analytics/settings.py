@@ -74,6 +74,8 @@ LOGIN_URL = '/admin/login/'
 LOGIN_REDIRECT_URL = '/analytics/dashboard/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 ADMIN_DISABLE_APP_INDEX = True
+ALLOWED_HOSTS = ["*"]
+
 
 
 
