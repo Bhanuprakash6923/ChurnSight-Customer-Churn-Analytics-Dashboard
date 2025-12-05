@@ -13,14 +13,12 @@
         --text-light: #eef2ff;
     }
 
-    /* FULL SCREEN PREMIUM BACKGROUND */
     body {
         background: radial-gradient(circle at top, #0ea5e9 0%, #0a0f1e 65%);
         background-attachment: fixed;
         color: var(--text-light);
     }
 
-    /* Remove default sidebar spacing / layout */
     #content.colMS,
     #content.colM,
     #content-main {
@@ -29,7 +27,6 @@
         padding: 15px 20px !important;
     }
 
-    /* Header */
     #header {
         background: rgba(15, 23, 42, 0.7) !important;
         backdrop-filter: blur(12px);
@@ -72,14 +69,12 @@
         background: rgba(255,255,255,0.08);
     }
 
-    /* Remove default sidebar panel */
+    /* Remove only sidebars, not main content */
     #nav-sidebar,
-    .app-index,
     #sidebar {
         display: none !important;
     }
 
-    /* Dashboard Hero Banner */
     .admin-top-banner {
         width: 100%;
         border-radius: 18px;

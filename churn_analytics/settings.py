@@ -27,6 +27,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
 
 ROOT_URLCONF = 'churn_analytics.urls'
@@ -75,6 +77,9 @@ LOGIN_REDIRECT_URL = '/analytics/dashboard/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 ADMIN_DISABLE_APP_INDEX = True
 ALLOWED_HOSTS = ["*"]
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 
