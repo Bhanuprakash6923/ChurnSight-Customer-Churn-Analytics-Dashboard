@@ -3,4 +3,9 @@ pandas
 scikit-learn
 joblib
 gunicorn
+streamlit
+pandas
+scikit-learn
+plotly
+
 
